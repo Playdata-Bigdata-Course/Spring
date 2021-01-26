@@ -1,0 +1,8 @@
+
+1. 자바소스
+	1. Person.java
+	2. RunTest.java
+		-main() 보유
+2. 설정파일
+	- applicationContext.xml
+		Person 객체 생성 관련된 srping 설정

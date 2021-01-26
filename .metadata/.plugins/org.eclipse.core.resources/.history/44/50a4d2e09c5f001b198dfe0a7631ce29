@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+	<!-- 
+		step01 : bean이 설정된 순서에 맞게 객체 생성 확인  
+		step02 : Car의 멤버 변수들값 설정에서 초기화
+			변수 = 속성 = attribute = property
+				1. 생성자(Constructor) 통해서 초기화
+				2. setXxx() 등의 메소드 통해서 초기화
+				
+		step03 : scope 적용
+			scope - 객체 생성개수 관리
+				default scope="singleton" -container 생성 시 하나만 생성해서 재사용
+				scope="prototype" - getBean() 호출시마다 무조건 즉시 생성
+	-->
+	
+	<!-- public Car(String carName, int carNumber) 생성자 호출하는 설정 -->
+	<bean id="car" class="model.domain.Car">
+		<constructor-arg value="리어카"/>
+		<constructor-arg value="123"/>
+	</bean> 
+	
+	<!-- <bean id="car" class="model.domain.Car">
+		<<constructor-arg name="carName" value="fldz"/>
+		<constructor-arg name="carNumber" value="123"/>
+		or
+		<constructor-arg index="0" value="그렌져"/>
+		<constructor-arg index="1" value="123"/>
+	</bean> -->
+	
+	
+		<!-- public Customer(String name, int age, Car car) -->
+	<bean id="customer" class="model.domain.Customer">
+	<constructor-arg value="권희성" />
+	<constructor-arg value="28" />
+	<constructor-arg ref="car" />
+	</bean>
+	
+</beans>

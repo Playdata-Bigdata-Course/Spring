@@ -4,7 +4,8 @@
 
 2. spring library 세팅
 	- 기본 설정시 
-		spring-context 로 검색해서 셋팅
+		spring-context 로 검색해서 셋팅했으나 현 프로젝트 상에서는 스프링 빈 생성에 한해서만 학습
+		
 		
 3. 실습내용
 	1. Customer 고객 관리 프로그램이라 가정

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+	
+	<!-- aop 사용을 위한 필수 설정 -->
+	<aop:aspectj-autoproxy />
+	
+	<!-- 핵심(biz, core)과 공통(aspect)을 스프링 빈으로 등록-->
+	<bean id="biz" class="step02.biz.aop.Car" /> 
+	<bean id="common" class="step02.common.aop.NoticeAspect" /> 
+	
+	<!--
+		 핵심로직 실행 전, 후 공통로직 적용 
+		핵심의 어떤 메소드들에 공통로직 적용
+		어떤 핵심 로직의 메소드에 어떤 공통로직의 메소드를 정해진 시점에 적용
+		spring은 aspect라는 framework사용
+		- 기능을 메소드에만 적용 + 표현법은 그대로 사용
+	-->
+	<aop:config>
+		<aop:pointcut id="bizLogic" expression="execution(* step02.biz.aop.Car.buy*(..))" />
+		
+		<aop:aspect ref="common">
+			<aop:before method="noticBuyStart" pointcut-ref="bizLogic"/>
+			<aop:after method="noticBuyEnd" pointcut-ref="bizLogic"/> 
+			
+			<!-- <aop:before method="noticBuyStart" pointcut="execution(* step02.biz.aop.Car.buy*(..))"/>
+			<aop:after method="noticBuyEnd" pointcut="execution(* step02.biz.aop.Car.buy*(..))"/> -->
+		</aop:aspect>
+	</aop:config>
+</beans>

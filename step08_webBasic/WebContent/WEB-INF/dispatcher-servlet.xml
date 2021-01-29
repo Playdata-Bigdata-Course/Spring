@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+	
+	<!-- 1. url 에 대한 인식을 하게 하기 위한 설정 2. @ 애노테이션이 선언된 클래스가 포함된 package 스켄 3. 
+		view를 검색해서 실행할 수 있게 해주는 기능의 API를 스프링 빈으로 등록 -->
+	<mvc:annotation-driven />
+	<mvc:default-servlet-handler />
+
+	<context:component-scan
+		base-package="controller" />
+	<!-- 개발자 - jsp 위치에 대한 관리용 API 등록 Spring Framework - id값에 설정된 이름으로 이 객체를 
+		활용 코드상에서 개발자가 getBean() 하는 일은 없음 -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+</beans>

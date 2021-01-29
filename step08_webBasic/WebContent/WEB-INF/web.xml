@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>step08_webBasic</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+
+	<!-- Spring MVC 개발을 위한 필수 설정 -->
+	<!-- 스프링 설정 파일을 추가 개발해서 그 설정 정보를 기반으로 client의 요청, 응답 처리를 일괄 관리하게 해주는 main 
+		contorller(front controller) 개발자가 구현하게 되는 controller는 sub controller -->
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+
+		<!-- server가 시작 될 때 서비스를 위한 project들 스캔 하면서 필요한 초기 실행 환경 구성 각 project별 
+			web.xml을 보고 필요사항 준비 1이라는 숫자는 우선적으로 객체 생성해 줘라 라는 의미 -->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+</web-app>

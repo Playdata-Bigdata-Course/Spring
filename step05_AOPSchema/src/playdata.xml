@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<aop:aspectj-autoproxy />
+	
+	<bean id="biz" class="step01.biz.schema.Car" />
+	<bean id="common" class="step01.common.schema.NoticeAspect" />
+	
+	<aop:config>
+		<!-- sale~ 하는 메소드만 예외처리 설정 -->
+		<aop:pointcut id="bizLogic" expression="execution(* step01.biz.shcema.Car.sale*(int))" />
+		<aop:aspect ref="common">
+			<!-- public void noticException(Exception e) {} -->
+			<aop:after-throwing method="noticException" throwing="e"  pointcut-ref="bizLogic" />
+			<!-- public void noticReturnValue(Object value) {} -->
+			<aop:after-returning method="noticReturnValue" returning="value" pointcut="execution(* step01.biz.shcema.Car.*(..))" />
+		</aop:aspect>
+	</aop:config>
+</beans>

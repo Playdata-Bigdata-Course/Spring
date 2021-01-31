@@ -22,7 +22,6 @@ public class TestController {
 		//HttpServletRequest 객체에 setAttribute("key", "data")
 		mv.addObject("key", "data"); //데이터저장(model 저장)
 		mv.setViewName("finalView"); //jsp 즉 실행 view 지정
-		
 		return mv;
 	
 	}

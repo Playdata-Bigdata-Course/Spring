@@ -85,6 +85,8 @@ public class Step03SessionTracking {
 	 * View단 : ${SessionScope.cust.id} 사용
 	 * 
 	 * Model API - request 또는 session 모두에서 사용
+	 * 단, @SessionAttributes({"id","age,"cust"}) 선언되어 있으면서
+	 * 선언된 key로 model.addAttribute("cust", cust)로 처리할 경우엔 세션 객체에 저장되는 구조
 	 */
 	//sessionTest3DTO
 	//view에서 활용 : ${SessionScope.cust.id}
